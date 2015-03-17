@@ -19,6 +19,7 @@ tshark_cmd = [ 'tshark', '-n' ]
 tshark_cmd.extend(sys.argv[2:-1])
 tshark_cmd.append('-r')
 tshark_cmd.append(sys.argv[1])
+tshark_cmd.append('-Y')
 tshark_cmd.append(sys.argv[-1])
 
 # start tshark subprocess and prepare a pipe to which it will write stdout
@@ -46,6 +47,7 @@ while True:
     msg['msg'] = ret.group(5)
     messages.append(msg)
   else:
+    print >>sys.stderr, "tshark command: '%s' " % tshark_cmd
     print >>sys.stderr, "line '%s' not handled by regex !" % line
     break
 
